@@ -21,5 +21,13 @@ body{
 }
 
 .card-img{
+  height: 300px;
   width: 300px;
+}
+.cards-list{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+
 }

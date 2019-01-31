@@ -21,7 +21,7 @@ class Search extends Component {
     })
   }
   render(){
-    const card = this.props.characters.map(char => {
+    const cards = this.props.characters.map(char => {
       return <CharCard key={char.id} char={char}/>
     })
     return(
@@ -32,7 +32,7 @@ class Search extends Component {
           value={this.state.searchTerm}
           onChange={this.handleSearch}
         />
-        {card}
+        <div className="cards-list">{cards}</div>
       </div>
     )
   }

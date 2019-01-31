@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {getSingleChar} from '../ducks/reducer';
+import { connect } from 'react-redux';
+import { getSingleChar } from '../ducks/reducer';
 
 class CharDetails extends Component {
   componentDidMount(){
     this.props.getSingleChar(this.props.match.params.id)
+    console.log(this.props)
   }
   render() {
     const {char} = this.props;

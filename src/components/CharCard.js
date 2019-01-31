@@ -1,8 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const CharCard = (props) =>{
-  const {char} = props;
+  const { char } = props;
   return(
     <div>
       <Link to={`/chardetails/${char.id}`}> 
