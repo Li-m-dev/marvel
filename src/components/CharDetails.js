@@ -11,11 +11,13 @@ class CharDetails extends Component {
   }
   render() {
     const {char, comics} = this.props;
-    const comic = comics.map(comic=>{
+    const comicList = comics.map(comic=>{
       return (
-        <div className="comic-card">
+        <div className="comic-card" key={comic.id}>
           <h4>{comic.title}</h4>
-          <img src={`${comic.images[0].path}.${comic.images[0].extension}`} alt={comic.title}/>
+          <div>
+            <img src={comic.thumbnail && `${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title}/>
+          </div>
         </div>
       )
     })
@@ -24,9 +26,11 @@ class CharDetails extends Component {
         <h2>{char.name}</h2>
         <img className="card-img"src={char.thumbnail && `${char.thumbnail.path}.${char.thumbnail.extension}`} alt={char.name}/>
         <p>{char.description}</p>
-        <div className="comics-wrapper">
-          {comic}
-        </div>
+        {this.props.loading 
+        ? <h2>Loading Comics</h2> 
+        :<div className="comics-wrapper">
+          {comicList}
+        </div> }
       </div>
     );
   }

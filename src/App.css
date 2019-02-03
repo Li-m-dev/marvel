@@ -33,8 +33,12 @@ body{
   justify-content: center;
 }
 .comic-card{
-  height: 300px;
-  width: 250px;
+  width: 220px;
+  height: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 30px auto;
 }
 .comic-card img{
   height: 180px;
