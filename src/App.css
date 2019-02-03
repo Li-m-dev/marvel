@@ -25,6 +25,17 @@ body{
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  
-
+}
+.comics-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.comic-card{
+  height: 300px;
+  width: 250px;
+}
+.comic-card img{
+  height: 180px;
 }

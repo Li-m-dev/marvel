@@ -3,7 +3,8 @@ import {apiKey} from '../apiKey';
 
 // constants (action type)
 const GET_CHARS = "GET_CHARS",
-      GET_SINGLE_CHAR = "GET_SINGLE_CHAR"
+      GET_SINGLE_CHAR = "GET_SINGLE_CHAR",
+      GET_COMICS = "GET_COMICS"
 
 // function(action creators)
 export function getChars(searchTerm){
@@ -18,11 +19,18 @@ export function getSingleChar(id){
     payload: axios.get(`https://gateway.marvel.com:443/v1/public/characters/${id}?apikey=${apiKey}`)
   }
 }
+export function getComics(id){
+  return {
+    type: GET_COMICS,
+    payload: axios.get(`https://gateway.marvel.com:443/v1/public/characters/${id}/comics?apikey=${apiKey}`)
+  }
+}
 
 // state(initialState)
 const initialState = {
   characters: [],
-  char:{}
+  char:{},
+  comics: []
 }
 
 // reducer:
@@ -37,6 +45,11 @@ export default function reducer(state=initialState, action){
       return {
         ...state,
         char: action.payload.data.data.results[0]
+      }
+    case `${GET_COMICS}_FULFILLED`:
+      return {
+        ...state,
+        comics: action.payload.data.data.results
       }
     default:
       return state;
