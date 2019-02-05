@@ -10,7 +10,7 @@ const ComicModal = (props) => {
         <img src={comic.thumbnail && `${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title}/>
         </div>
         <p>{comic.description}</p>
-        <button>X</button>
+        <button onClick={props.closeModal}>X</button>
       </div>
       : <div> Loading... </div>
     );

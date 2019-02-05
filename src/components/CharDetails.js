@@ -6,23 +6,25 @@ import ComicModal from './ComicModal';
 
 class CharDetails extends Component {
   state = {
-    clickedComic: false
+    clickedComic: false,
+    selectedIndex: null
   }
 
+  
   componentDidMount(){
     this.props.getSingleChar(this.props.match.params.id);
     this.props.getComics(this.props.match.params.id);
-    console.log(this.props)
+    // console.log(this.props)
   }
   render() {
     console.log(this.state)
     const {char, comics} = this.props;
-    const comicList = comics.map(comic=>{
+    const comicList = comics.map((comic,i)=>{
       return (
         <div 
         className="comic-card" 
         key={comic.id}
-        onClick={() => this.setState({clickedComic: true})}>
+        onClick={() => this.setState({clickedComic: true, selectedIndex: i})}>
           <h4>{comic.title}</h4>
           <div>
             <img 
@@ -36,15 +38,22 @@ class CharDetails extends Component {
     return (
       <div>
         <h2>{char.name}</h2>
-        <img className="card-img"src={char.thumbnail && `${char.thumbnail.path}.${char.thumbnail.extension}`} alt={char.name}/>
+        <img 
+          className="card-img"
+          src={char.thumbnail && `${char.thumbnail.path}.${char.thumbnail.extension}`} 
+          alt={char.name}
+        />
         <p>{char.description}</p>
         {this.props.loading 
-        ? <h2>Loading Comics</h2> 
-        :<div className="comics-wrapper">
-          {comicList}
-        </div> }
-        {this.state.clickedComic && <ComicModal comic ={comics[3]}/>}
-        {/* <ComicModal comic ={comics[3]}/> */}
+          ? <h2>Loading Comics</h2> 
+          : <div className="comics-wrapper">
+              {comicList}
+            </div>
+        }
+        {this.state.clickedComic && <ComicModal 
+          closeModal={()=>this.setState({clickedComic:false})}
+          comic={comics[this.state.selectedIndex]}
+        />}
       </div>
     );
   }
