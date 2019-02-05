@@ -1,22 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSingleChar, getComics } from '../ducks/reducer';
+import ComicModal from './ComicModal';
 
 
 class CharDetails extends Component {
+  state = {
+    clickedComic: false
+  }
+
   componentDidMount(){
     this.props.getSingleChar(this.props.match.params.id);
     this.props.getComics(this.props.match.params.id);
     console.log(this.props)
   }
   render() {
+    console.log(this.state)
     const {char, comics} = this.props;
     const comicList = comics.map(comic=>{
       return (
-        <div className="comic-card" key={comic.id}>
+        <div 
+        className="comic-card" 
+        key={comic.id}
+        onClick={() => this.setState({clickedComic: true})}>
           <h4>{comic.title}</h4>
           <div>
-            <img src={comic.thumbnail && `${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title}/>
+            <img 
+            src={comic.thumbnail && `${comic.thumbnail.path}.${comic.thumbnail.extension}`} 
+            alt={comic.title}
+            />
           </div>
         </div>
       )
@@ -31,6 +43,8 @@ class CharDetails extends Component {
         :<div className="comics-wrapper">
           {comicList}
         </div> }
+        {this.state.clickedComic && <ComicModal comic ={comics[3]}/>}
+        {/* <ComicModal comic ={comics[3]}/> */}
       </div>
     );
   }

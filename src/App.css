@@ -44,3 +44,26 @@ body{
 .comic-card img{
   height: 180px;
 }
+.comic-modal{
+  z-index: 10;
+  width: 80%;
+  height: 70%;
+  background: lightgray;
+  position: fixed;
+  right: 10%;
+  top: 15%;
+  border-radius: 10px;
+  display: flex;
+  padding: 15px;
+}
+.comic-modal img{
+  width: 250px; 
+}
+.comic-modal button{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgb(185, 23, 23);
+  width: 25px;
+  height: 25px;
+}
