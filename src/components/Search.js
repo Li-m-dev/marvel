@@ -1,44 +1,60 @@
-import React, { Component } from 'react';
-import { debounce } from 'lodash';
-import { connect } from 'react-redux';
-import CharCard from './CharCard';
-import { getChars } from '../ducks/reducer';
+import React, { Component } from "react";
+import ReactLoading from "react-loading";
+import { debounce } from "lodash";
+import { connect } from "react-redux";
+import CharCard from "./CharCard";
+import { getChars } from "../ducks/reducer";
 
 class Search extends Component {
   state = {
-    searchTerm : ""
-  }
+    searchTerm: ""
+  };
 
-  debounceSearch = debounce(()=>{
-    this.props.getChars(this.state.searchTerm)
-  },500)
+  debounceSearch = debounce(() => {
+    this.props.getChars(this.state.searchTerm);
+  }, 500);
 
-  handleSearch = (e) =>{
-    this.setState({
-      searchTerm:e.target.value
-    },()=>{
-      this.debounceSearch()
-    })
-  }
-  render(){
+  handleSearch = e => {
+    this.setState(
+      {
+        searchTerm: e.target.value
+      },
+      () => {
+        this.debounceSearch();
+      }
+    );
+  };
+  render() {
     const cards = this.props.characters.map(char => {
-      return <CharCard key={char.id} char={char}/>
-    })
-    return(
+      return <CharCard key={char.id} char={char} />;
+    });
+    return (
       <div>
-        <input 
-          type="text" 
+        <input
+          type="text"
           placeholder="Search by name ..."
           value={this.state.searchTerm}
           onChange={this.handleSearch}
         />
-        <div className="cards-list">{cards}</div>
+        {this.props.loading ? (
+          <ReactLoading
+            type="spinningBubbles"
+            color="blue"
+            height={"20vh"}
+            width={"20vw"}
+          />
+        ) : (
+          <div className="cards-list">{cards}</div>
+        )}
       </div>
-    )
+    );
   }
 }
-const mapStateToProps = (state)=>{
-  return state
-}
+const mapStateToProps = state => {
+  return state;
+};
 
-export default connect(mapStateToProps,{getChars})(Search);
+export default connect(
+  mapStateToProps,
+  { getChars }
+)(Search);
