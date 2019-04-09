@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactLoading from "react-loading";
+import IsLoading from "./IsLoading/IsLoading";
 import { debounce } from "lodash";
 import { connect } from "react-redux";
 import CharCard from "./CharCard";
@@ -37,12 +37,7 @@ class Search extends Component {
           onChange={this.handleSearch}
         />
         {this.props.loading ? (
-          <ReactLoading
-            type="spinningBubbles"
-            color="blue"
-            height={"20vh"}
-            width={"20vw"}
-          />
+          <IsLoading />
         ) : (
           <div className="cards-list">{cards}</div>
         )}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactLoading from "react-loading";
+import IsLoading from "./IsLoading/IsLoading";
 import { connect } from "react-redux";
 import { getSingleChar, getComics } from "../ducks/reducer";
 import ComicModal from "./ComicModal";
@@ -53,12 +53,7 @@ class CharDetails extends Component {
         />
         <p>{char.description}</p>
         {this.props.loading ? (
-          <ReactLoading
-            type="spinningBubbles"
-            color="blue"
-            height={"20vh"}
-            width={"20vw"}
-          />
+          <IsLoading />
         ) : (
           <div className="comics-wrapper">{comicList}</div>
         )}
